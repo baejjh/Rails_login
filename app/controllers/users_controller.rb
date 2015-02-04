@@ -4,13 +4,13 @@ class UsersController < ApplicationController
   end
 
   def create #restful route to make new user!
-    @user = User.new(user_params)
+    @user = User.new( user_params )
     if @user.save
       sign_in @user
       flash[:notice] = 'New user created!'
       redirect_to @user
     else
-      flash[:errors] = @user.errors.full_messages
+      flash[:register_errors] = @user.errors.full_messages
       redirect_to new_user_path
     end
   end
@@ -18,6 +18,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+
+
   #define strong parameters!
   private
     def user_params

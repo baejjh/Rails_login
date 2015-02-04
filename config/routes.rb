@@ -5,6 +5,7 @@ SimpleLogin::Application.routes.draw do
   get "/signup"  => 'users#new'
   get "/signin" => 'sessions#new'
   get "/signout" => 'sessions#destroy'
+  get '/index' =>'users#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
