@@ -17,6 +17,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    @messages = Message.new
+    # @comment = Comment.new
+
+    @messages = Message.all.order('created_at DESC')
   end
 
   #define strong parameters!

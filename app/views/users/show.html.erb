@@ -10,17 +10,31 @@
   	<%= flash[:enter_success] %>
 </div>
 <% end %>
+<!-- Display Error Msg -->
+	<% if flash[:enter_fail] %>
+		<div class="alert alert-danger" role="alert">
+		<% flash[:enter_fail].each do |each_error| %>
+			<p><%= each_error %></p>
+		<% end %>
+		</div>
+	<% end %>
+
 <div class='col-md-8 col-md-offset-2'>
 <!-- Form for New Msg -->
 	<h1>Post a Message</h1>
-		%= simple_form_for(@message) do |m| %>
-		  %= m.input :post, 		:class => '', 								:placeholder => 'Create a Message' %>
-		  %= m.button :submit, 	:class => 'btn btn-primary', 	:value => 'Post a Message' %>
+		%= simple_form_for @message, :method => 'post',
+			:url => 'messages_path' do |m| %>
+		  %= m.input :content, 		:placeholder => 'Create a Message', :label => false %>
+		  %= m.button :submit, 		:class => 'btn btn-primary', :value => 'Post a Message' %>
 		% end %>
 <!-- Display All Msg -->
-	<h3>Message History</h3>
-	<h5>first_name+' '+last_name - date_time</h5>
-		<p>message content message content message content message content message content message content message content message content message content message content message content message content message content message content message content</p>
+	<h3>Recent History</h3>
+	<% if @messages %>
+		<% @messages.each do |m| %>
+			<h5>first_name+' '+last_name - <%= m.created_at %></h5>
+			<p><%= m.content %></p>
+		<% end %>
+	<% end %>
 		<div class='col-md-offset-1'>
 		<!-- Display All Comments -->
 		<h5>first_name+' '+last_name - date_time</h5>

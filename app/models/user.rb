@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
             :confirmation   => true,
             :length         => { :within => 4..100 }
 
+  #relationship to message model
+  has_many :messages
+
   #before the user gets added to DB, run this function.
   before_save :encrypt_password
 
