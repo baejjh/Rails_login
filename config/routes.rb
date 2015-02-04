@@ -2,10 +2,9 @@ SimpleLogin::Application.routes.draw do
   root 'users#new'
   resources :users
   resources :sessions, :only => [:new, :create, :destroy] #only need 3 restful routes for Sessions
-  get "/signup"  => 'users#new'
-  get "/signin" => 'sessions#new'
-  get "/signout" => 'sessions#destroy'
-  get '/index' =>'users#index'
+  get "/signup"       => 'users#new'
+  get "/signin"       => 'sessions#new'
+  get "/signout"      => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

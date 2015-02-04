@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new( user_params )
     if @user.save
       sign_in @user
-      flash[:notice] = 'New user created!'
+      flash[:enter_success] = 'Welcome, '+@user.first_name+"! Your account has been created."
       redirect_to @user
     else
       flash[:register_errors] = @user.errors.full_messages
@@ -18,8 +18,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
-
 
   #define strong parameters!
   private

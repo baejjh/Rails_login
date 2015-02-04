@@ -1,30 +1,22 @@
-<div class="col-md-6">
-<h1>Register</h1>
-<% if flash[:register_errors] %>
-	<% flash[:register_errors].each do |each_error| %>
-		<p><%= each_error %></p>
+<div class="col-md-6 col-md-offset-3">
+<h1>Welcome to the Blog</h1>
+<p>You must register to post messages and comments.</p>
+<!-- Display Error Msg -->
+	<% if flash[:register_errors] %>
+		<div class="alert alert-danger" role="alert">
+		<% flash[:register_errors].each do |each_error| %>
+			<p><%= each_error %></p>
+		<% end %>
+		</div>
 	<% end %>
-<% end %>
-<%= simple_form_for(@user) do |f| %>
-  <%= f.input :first_name, 						:class => '', placeholder: 'Enter Your First Name' %>
-  <%= f.input :last_name, 						:class => '', placeholder: 'Enter Your Last Name' %>
-  <%= f.input :email, 								:class => '', placeholder: 'user@domain.com' %>
-  <%= f.input :password, 							:class => '', placeholder: 'Enter Your Password' %>
-  <%= f.input :password_confirmation, :class => '', placeholder: 'Confirm Your Password' %>
-  <%= f.button :submit, 							:class => 'btn btn-default' %>
-<% end %>
-</div>
-
-<div class="col-md-6">
-<h1>Login</h1>
-<% if flash[:login_errors] %>
-	<% flash[:login_errors].each do |each_error| %>
-		<p><%= each_error %></p>
+<!-- Form for Registration-->
+	<%= simple_form_for(@user) do |f| %>
+	  <%= f.input :first_name, 						:class => '', placeholder: 'Enter Your First Name' %>
+	  <%= f.input :last_name, 						:class => '', placeholder: 'Enter Your Last Name' %>
+	  <%= f.input :email, 								:class => '', placeholder: 'user@domain.com' %>
+	  <%= f.input :password, 							:class => '', placeholder: 'Enter Your Password' %>
+	  <%= f.input :password_confirmation, :class => '', placeholder: 'Confirm Your Password' %>
+	  <%= f.button :submit, 							:class => 'btn btn-primary' %>
 	<% end %>
-<% end %>
-<%= simple_form_for(@user) do |f| %>
-  <%= f.input :email, 								:class => '', placeholder: 'user@domain.com' %>
-  <%= f.input :password, 							:class => '', placeholder: 'Enter Your Password' %>
-  <%= f.button :submit, 							:class => 'btn btn-default' %>
-<% end %>
-</div>
+	</div>
+<a href="/signin">Already a User? Sign in.</a>

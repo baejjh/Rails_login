@@ -6,18 +6,18 @@ class User < ActiveRecord::Base
   email_regex = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
 
   validates :first_name,    :presence   => true,
-            :length               => { :maximum => 30 }
+            :length         => { :maximum => 30 }
   
-  validates :last_name,    :presence   => true,
-            :length               => { :maximum => 30 }
+  validates :last_name,     :presence   => true,
+            :length         => { :maximum => 30 }
   
-  validates :email,   :presence   => true,
-            :format               => { :with => email_regex },
-            :uniqueness           => { :case_sensitive => false }
+  validates :email,         :presence   => true,
+            :format         => { :with => email_regex },
+            :uniqueness     => { :case_sensitive => false }
             #this validates the form input
-  validates :password,  :presence => true,
-            :confirmation         => true,
-            :length               => { :within => 4..100 }
+  validates :password,      :presence => true,
+            :confirmation   => true,
+            :length         => { :within => 4..100 }
 
   #before the user gets added to DB, run this function.
   before_save :encrypt_password

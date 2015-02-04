@@ -5,14 +5,15 @@ class SessionsController < ApplicationController
 
   #create the session resource ie, let user log in
   def create
-    #this references the funciton we made in user.rb
+    #this references the function we made in user.rb
   	user = User.authenticate(params[:session][:email], params[:session][:password])
   	if user.nil?
-  		flash[:error] = "couldn't find a user with those credentials"
+  		flash[:login_errors] = "Email and password do not match the database. Try again."
       #if there is an error, redirect back to login
       redirect_to new_session_path
   	else
   		sign_in user #helper function
+      flash[:enter_success] = "Welcome back! We missed you!"
   		redirect_to user
   	end
 
