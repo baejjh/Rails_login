@@ -5,13 +5,13 @@ class User < ActiveRecord::Base
 
   email_regex = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
 
-  validates :first_name,    :presence   => true,
+  validates :first_name,    :presence => true,
             :length         => { :maximum => 30 }
   
-  validates :last_name,     :presence   => true,
+  validates :last_name,     :presence => true,
             :length         => { :maximum => 30 }
   
-  validates :email,         :presence   => true,
+  validates :email,         :presence => true,
             :format         => { :with => email_regex },
             :uniqueness     => { :case_sensitive => false }
             #this validates the form input
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   #relationship to message model
   has_many :messages
+  has_many :comments,       :through => :messages
 
   #before the user gets added to DB, run this function.
   before_save :encrypt_password

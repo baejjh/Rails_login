@@ -21,28 +21,34 @@
 
 <div class='col-md-8 col-md-offset-2'>
 <!-- Form for New Msg -->
-	<h1>Post a Message</h1>
-		%= simple_form_for @message, :method => 'post',
-			:url => 'messages_path' do |m| %>
-		  %= m.input :content, 		:placeholder => 'Create a Message', :label => false %>
-		  %= m.button :submit, 		:class => 'btn btn-primary', :value => 'Post a Message' %>
-		% end %>
-<!-- Display All Msg -->
-	<h3>Recent History</h3>
-	<% if @messages %>
-		<% @messages.each do |m| %>
-			<h5>first_name+' '+last_name - <%= m.created_at %></h5>
-			<p><%= m.content %></p>
-		<% end %>
+<h1>Post a Message</h1>
+	<%= simple_form_for @message, :method => 'post',
+		:url => 'messages_path' do |m| %>
+	  <%= m.input :content, 		:placeholder => 'Create a Message', :label => false %>
+	  <%= m.button :submit, 		:class => 'btn btn-primary', 				:value => 'Post a Message' %>
 	<% end %>
-		<div class='col-md-offset-1'>
-		<!-- Display All Comments -->
-		<h5>first_name+' '+last_name - date_time</h5>
-			<p>message content message content message content message content message content message content message content message content message content message content message content message content message content message content message content</p>
+<!-- Display All Msgs -->
+<h3>Recent History</h3>
+<% if @messages %>
+<% @messages.each do |m| %>
+	<h5><%= m.user.first_name + ' ' + m.user.last_name %> - <%= m.created_at %></h5>
+	<p><%= m.content %></p>
+	<!-- Display All Comments -->
+	<% if m.comments %>
+	<div class='col-md-offset-1'>
+		<% m.comments.each do |c| %>
+		<h5><%= c.user.first_name + ' ' + c.user.last_name %> - <%= c.created_at %></h5>
+		<p><%= c.reply %></p>
+		<% end %>
 		<!-- Form for New Comment -->
 		<h5>Post a Comment</h5>
-			%= simple_form_for(@comment) do |m| %>
-			  %= m.input :post, 		:class => '', 								:placeholder => 'Create a Comment' %>
-			  %= m.button :submit, 	:class => 'btn btn-success', 	:value => 'Post a Comment' %>
-			% end %>
+		%= simple_form_for(@comment) do |m| %>
+		  %= m.input :post, 			:class => '', 								:placeholder => 'Create a Comment' %>
+		  %= m.button :submit, 	:class => 'btn btn-success', 	:value => 'Post a Comment' %>
+		% end %>
+	</div>
+	<% end %>
+<% end %>
+<% end %>
+<!-- End All Msgs -->
 </div>
