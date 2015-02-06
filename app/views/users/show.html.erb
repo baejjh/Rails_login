@@ -39,17 +39,70 @@
 			<!-- Delete Msg Button -->
 			<% if m.user_id == @user.id %>
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<button type="button" class="close" data-toggle="modal" data-target="#editMsgModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 			<% end %>
-		<p><%= m.content %></p>
+			<!-- Modal for Msg Editing -->
+			<div class="modal fade" id="editMsgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Edit Your Message</h4>
+			      </div>
+			      <div class="modal-body">
+			        <form action="<%= messages_path %>" method="post">
+							<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+								<div class="form-group">
+									<textarea class="form-control" name="message[content]"><%= m.content %></textarea>
+									<input type="hidden" name="message[user_id]" value="<%= @user.id %>" />
+								</div>
+							</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-warning">Save Changes</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- End Msg Modal -->
+			<p><%= m.content %></p>
 		<!-- Display All Cmts -->
 		<% if m.comments %>
 		<div class='col-md-offset-1'>
 			<% m.comments.each do |c| %>
 			<h5><%= c.user.first_name + ' ' + c.user.last_name %> - <%= c.created_at %></h5>
-				<!-- Delete Msg Button -->
+				<!-- Delete Cmt Button -->
 				<% if c.user_id == @user.id %>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" data-toggle="modal" data-target="#editCmtModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 				<% end %>
+				<!-- Modal for Cmt Editing -->
+				<div class="modal fade" id="editCmtModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Edit Your Comment</h4>
+				      </div>
+				      <div class="modal-body">
+				        <form action="<%= comments_path %>" method="post">
+								<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden" />
+									<div class="form-group">
+										<textarea class="form-control" name="comment[reply]"><%= c.reply %></textarea>
+										<input type="hidden" name="comment[user_id]" value="<%= @user.id %>" />
+										<input type="hidden" name="comment[message_id]" value="<%= m.id %>" />
+									</div>
+								</form>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-warning">Save Changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- End Cmt Modal -->
 			<p><%= c.reply %></p>
 			<% end %>
 			<!-- Form for New Cmt -->
@@ -59,7 +112,7 @@
 					<textarea class="form-control" placeholder="Create a Comment" name="comment[reply]"></textarea>
 					<input type="hidden" name="comment[user_id]" value="<%= @user.id %>" />
 					<input type="hidden" name="comment[message_id]" value="<%= m.id %>" />
-					<input type="submit" class="btn btn-default align-right" value="Post a Comment" />
+					<input type="submit" class="btn btn-primary align-right" value="Post a Comment" />
 				</div>
 			</form>
 		</div>
