@@ -1,17 +1,17 @@
 <div class="col-md-6 col-md-offset-3">
-<h1>Sign In</h1>
-<p>You must have an account to post messages and comments.</p>
-<!-- Display Error Msg -->
-<% if flash[:login_errors] %>
-	<div class="alert alert-danger" role="alert">
-		<%= flash[:login_errors] %>
-	</div>
-<% end %>
-<!-- Form for Login-->
-<%= simple_form_for(:session, :url => sessions_path) do |f| %>
-  <%= f.input :email, 		:placeholder => 'user@domain.com' %>
-  <%= f.input :password, 	:placeholder => 'Enter Your Password' %>
-  <%= f.button :submit,		:value => "Sign In", 	:class => 'btn btn-success' %>
-<% end %>
+	<h1>Sign In</h1>
+	<p>You must have an account to post messages and comments.</p>
+	<!-- Display Error Msg -->
+	<% if flash[:login_errors] %>
+		<div class="alert alert-danger" role="alert">
+			<%= flash[:login_errors] %>
+		</div>
+	<% end %>
+	<!-- Form for Login-->
+	<%= simple_form_for(:session, :url => sessions_path) do |f| %>
+	  <%= f.input :email, 		:placeholder => 'user@domain.com' %>
+	  <%= f.input :password, 	:placeholder => 'Enter Your Password' %>
+	  <%= f.button :submit,		:value => "Sign In", 	:class => 'btn btn-success' %>
+	<% end %>
 </div>
 <a href="/">No account yet? Register as a User.</a>
