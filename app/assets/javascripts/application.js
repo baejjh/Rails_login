@@ -15,3 +15,23 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+
+$( document ).ready(function() {
+  $( "#editSubmitBtn" ).click(function( event ) {
+  	event.preventDefault();
+  	var msgID = $( '' )
+  	alert( "edit button submitted!" );
+  	$( editMsg ).attr({
+  		action: "/messages/:id",
+  		method: "post"
+  	});
+  });
+  $( "#deleteSubmitBtn" ).click(function( event ) {
+  	event.preventDefault();
+  	alert( "delete button submitted!" );
+  	$( editMsg ).attr({
+  		action: "/messages/:id",
+  		method: "post"
+  	});
+  });
+});

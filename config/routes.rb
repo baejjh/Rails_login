@@ -3,8 +3,8 @@ SimpleLogin::Application.routes.draw do
 
   resources :users            #use all users RESTful routes
   resources :sessions, :only => [:new, :create, :destroy] #only need 3 restful routes for Sessions
-  resources :messages, :only => [:new, :create]
-  resources :comments, :only => [:new, :create]
+  resources :messages
+  resources :comments
 
   get "/signup"               => 'users#new'
   get "/signin"               => 'sessions#new'
